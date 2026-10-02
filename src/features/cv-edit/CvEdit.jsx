@@ -6,9 +6,15 @@ import ExperienceSection from "./experienceSection/ExperienceSection";
 import EducationSection from "./educationSection/EducationSection";
 import AdditionalSkillsSection from "./additionalSkillsSection/AdditionalSkillsSection";
 
-export default function CvEdit({ cvData, setCvData ,editData, setEditData }) {
+export default function CvEdit({
+  cvData,
+  setCvData,
+  editData,
+  setEditData,
+  isEditing,
+  setIsEditing,
+}) {
   const [activeSection, setActiveSection] = useState("personal-info-section");
-  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className="flex-1">

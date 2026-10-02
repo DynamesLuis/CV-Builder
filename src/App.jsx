@@ -15,11 +15,19 @@ function App() {
   });
 
   const [editData, setEditData] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className="flex w-full p-5">
-      <CvEdit cvData={cvData} setCvData={setCvData} editData={editData} setEditData={setEditData}/>
-      <CvPreview/>
+      <CvEdit
+        cvData={cvData}
+        setCvData={setCvData}
+        editData={editData}
+        setEditData={setEditData}
+        isEditing={isEditing}
+        setIsEditing={setIsEditing}
+      />
+      <CvPreview />
     </div>
   );
 }
