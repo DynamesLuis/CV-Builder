@@ -19,8 +19,13 @@ export default function PersonalInfoSection({
   };
 
   const handleSaveClick = () => {
-    setCvData({...editData})
-  }
+    setCvData((prevData) => ({
+      ...prevData,
+      personalInfo: {
+        ...editData,
+      },
+    }));
+  };
 
   return (
     <div className="my-4">
@@ -36,7 +41,7 @@ export default function PersonalInfoSection({
           onSave={handleSaveClick}
         />
       ) : (
-        <PersonalInfoDisplay cvData={cvData} onClick={handleEditClick} />
+        <PersonalInfoDisplay cvData={cvData.personalInfo} onClick={handleEditClick} />
       )}
     </div>
   );
