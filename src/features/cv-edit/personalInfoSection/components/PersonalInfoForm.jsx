@@ -7,14 +7,15 @@ export default function PersonalInfoForm({ personalInfoData, onChange, onCancel,
     }));
   };
 
-  const handleOnSave = (e) => {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
     onSave();
+    //we use onCancel just for exit editing
     onCancel();
   }
 
   return (
-    <form>
+    <form className="my-4" onSubmit={handleOnSubmit}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
         <label className="text-sm font-normal flex flex-col">
           Full Name
@@ -86,7 +87,7 @@ export default function PersonalInfoForm({ personalInfoData, onChange, onCancel,
         <button type="button" onClick={onCancel} className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out">
           Cancel
         </button>
-        <button type="button" onClick={handleOnSave} className="text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out">
+        <button type="submit" className="text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out">
           Save
         </button>
       </div>
