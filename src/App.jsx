@@ -14,8 +14,10 @@ function App() {
     },
   });
 
+  const [activeSection, setActiveSection] = useState("personal-info-section");
   const [editData, setEditData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const previewData = {}
 
   return (
     <div className="flex w-full p-5">
@@ -26,8 +28,10 @@ function App() {
         setEditData={setEditData}
         isEditing={isEditing}
         setIsEditing={setIsEditing}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
       />
-      <CvPreview />
+      <CvPreview cvData={previewData}/>
     </div>
   );
 }

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import EditNav from "./editNav/EditNav";
 import LayoutSection from "./layoutSection/LayoutSection";
 import PersonalInfoSection from "./personalInfoSection/PersonalInfoSection";
@@ -13,9 +12,9 @@ export default function CvEdit({
   setEditData,
   isEditing,
   setIsEditing,
+  activeSection,
+  setActiveSection,
 }) {
-  const [activeSection, setActiveSection] = useState("personal-info-section");
-
   return (
     <div className="flex-1">
       <EditNav
