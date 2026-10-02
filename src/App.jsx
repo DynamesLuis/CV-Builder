@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="flex w-full p-5">
-      <CvEdit cvData={cvData} editData={editData} setEditData={setEditData}/>
+      <CvEdit cvData={cvData} setCvData={setCvData} editData={editData} setEditData={setEditData}/>
       <div className="flex-1">asa</div>
     </div>
   );

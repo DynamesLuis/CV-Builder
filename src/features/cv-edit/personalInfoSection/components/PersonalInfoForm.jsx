@@ -1,4 +1,4 @@
-export default function PersonalInfoForm({ personalInfoData, onChange, onCancel }) {
+export default function PersonalInfoForm({ personalInfoData, onChange, onCancel, onSave }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     onChange((prevData) => ({
@@ -6,6 +6,12 @@ export default function PersonalInfoForm({ personalInfoData, onChange, onCancel 
       [name]: value,
     }));
   };
+
+  const handleOnSave = (e) => {
+    e.preventDefault();
+    onSave();
+    onCancel();
+  }
 
   return (
     <form>
@@ -77,10 +83,10 @@ export default function PersonalInfoForm({ personalInfoData, onChange, onCancel 
         </label>
       </div>
       <div className="flex justify-end gap-3">
-        <button onClick={onCancel} className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out">
+        <button type="button" onClick={onCancel} className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out">
           Cancel
         </button>
-        <button className="text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out">
+        <button type="button" onClick={handleOnSave} className="text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out">
           Save
         </button>
       </div>

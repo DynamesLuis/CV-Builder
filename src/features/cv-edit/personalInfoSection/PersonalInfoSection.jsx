@@ -3,6 +3,7 @@ import PersonalInfoDisplay from "./components/PersonalInfoDisplay";
 
 export default function PersonalInfoSection({
   cvData,
+  setCvData,
   editData,
   setEditData,
   isEditing,
@@ -13,9 +14,13 @@ export default function PersonalInfoSection({
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
+  const handleCancelClick = () => {
     setIsEditing(false);
   };
+
+  const handleSaveClick = () => {
+    setCvData({...editData})
+  }
 
   return (
     <div className="my-4">
@@ -27,7 +32,8 @@ export default function PersonalInfoSection({
         <PersonalInfoForm
           personalInfoData={editData}
           onChange={setEditData}
-          onCancel={handleSaveClick}
+          onCancel={handleCancelClick}
+          onSave={handleSaveClick}
         />
       ) : (
         <PersonalInfoDisplay cvData={cvData} onClick={handleEditClick} />

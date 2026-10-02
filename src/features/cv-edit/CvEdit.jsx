@@ -6,7 +6,7 @@ import ExperienceSection from "./experienceSection/ExperienceSection";
 import EducationSection from "./educationSection/EducationSection";
 import AdditionalSkillsSection from "./additionalSkillsSection/AdditionalSkillsSection";
 
-export default function CvEdit({ cvData, editData, setEditData }) {
+export default function CvEdit({ cvData, setCvData ,editData, setEditData }) {
   const [activeSection, setActiveSection] = useState("personal-info-section");
   const [isEditing, setIsEditing] = useState(false);
 
@@ -20,6 +20,7 @@ export default function CvEdit({ cvData, editData, setEditData }) {
       {activeSection === "personal-info-section" && (
         <PersonalInfoSection
           cvData={cvData}
+          setCvData={setCvData}
           editData={editData}
           setEditData={setEditData}
           isEditing={isEditing}
