@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CvEdit from "./features/cv-edit/CvEdit";
-import CvPreview from "./features/cv-ṕreview/CvPreview";
+import CvPreview from "./features/cv-preview/CvPreview";
 
 function App() {
   const [cvData, setCvData] = useState({
