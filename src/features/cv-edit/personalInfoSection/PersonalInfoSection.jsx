@@ -8,9 +8,13 @@ export default function PersonalInfoSection({
   isEditing,
   setIsEditing,
 }) {
-  const handleClick = () => {
+  const handleEditClick = () => {
     setEditData({ ...cvData.personalInfo });
     setIsEditing(true);
+  };
+
+  const handleSaveClick = () => {
+    setIsEditing(false);
   };
 
   return (
@@ -20,9 +24,13 @@ export default function PersonalInfoSection({
         Key details that will appear at the top of your résumé.
       </p>
       {isEditing ? (
-        <PersonalInfoForm personalInfoData={editData} onChange={setEditData} />
+        <PersonalInfoForm
+          personalInfoData={editData}
+          onChange={setEditData}
+          onCancel={handleSaveClick}
+        />
       ) : (
-        <PersonalInfoDisplay cvData={cvData} onClick={handleClick} />
+        <PersonalInfoDisplay cvData={cvData} onClick={handleEditClick} />
       )}
     </div>
   );
