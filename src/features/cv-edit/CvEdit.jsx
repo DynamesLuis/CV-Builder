@@ -6,17 +6,30 @@ import ExperienceSection from "./experienceSection/ExperienceSection";
 import EducationSection from "./educationSection/EducationSection";
 import AdditionalSkillsSection from "./additionalSkillsSection/AdditionalSkillsSection";
 
-export default function CvEdit() {
+export default function CvEdit({ cvData, setCvData ,editData, setEditData }) {
   const [activeSection, setActiveSection] = useState("personal-info-section");
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
     <div className="flex-1">
-      <EditNav activeSection={activeSection} onChangeSection={setActiveSection}/>
-      {activeSection === "layout-section" && <LayoutSection/>}
-      {activeSection === "personal-info-section" && <PersonalInfoSection/>}
-      {activeSection === "experience-section" && <ExperienceSection/>}
-      {activeSection === "education-section" && <EducationSection/>}
-      {activeSection === "skills-section" && <AdditionalSkillsSection/>}
+      <EditNav
+        activeSection={activeSection}
+        onChangeSection={setActiveSection}
+      />
+      {activeSection === "layout-section" && <LayoutSection />}
+      {activeSection === "personal-info-section" && (
+        <PersonalInfoSection
+          cvData={cvData}
+          setCvData={setCvData}
+          editData={editData}
+          setEditData={setEditData}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+        />
+      )}
+      {activeSection === "experience-section" && <ExperienceSection />}
+      {activeSection === "education-section" && <EducationSection />}
+      {activeSection === "skills-section" && <AdditionalSkillsSection />}
     </div>
-  )
+  );
 }
