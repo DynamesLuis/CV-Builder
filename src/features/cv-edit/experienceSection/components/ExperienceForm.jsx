@@ -1,7 +1,76 @@
+import { useState } from "react";
+
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
+function generateId() {
+  return crypto.randomUUID();
+}
+
 export default function ExperienceForm({ experienceInfo }) {
+  const [aditionalInfos, setAditionalInfos] = useState(
+    experienceInfo.additionalInfo.map((info) => {
+      return {
+        renderId: generateId(),
+        description: info,
+      };
+    }),
+  );
+
+  const aditionalInfosList = aditionalInfos.map((info, index) => {
+    return (
+      <div key={info.renderId} className="text-sm font-normal flex flex-col">
+        <label htmlFor={`description-${index}`}>Description {index + 1}</label>
+
+        <textarea
+          id={`description-${index}`}
+          value={info.description}
+          rows={3}
+          className={`w-full ${inputClassName}`}
+          onChange={(e) =>
+            handleChangeAdditionalInfo(info.renderId, e.target.value)
+          }
+        />
+
+        <button
+          type="button"
+          onClick={() => handleDeleteAdditionalInfo(info.renderId)}
+          className="self-end mt-2 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
+        >
+          Delete
+        </button>
+      </div>
+    );
+  });
+
+  const handleAddAdditionalInfo = () => {
+    setAditionalInfos((prev) => [
+      ...prev,
+      {
+        renderId: generateId(),
+        description: "",
+      },
+    ]);
+  };
+
+  const handleDeleteAdditionalInfo = (renderId) => {
+    setAditionalInfos(
+      aditionalInfos.filter(
+        (aditionalInfo) => aditionalInfo.renderId !== renderId,
+      ),
+    );
+  };
+
+  const handleChangeAdditionalInfo = (renderId, newValue) => {
+    setAditionalInfos((prev) =>
+      prev.map((aditionalInfo) =>
+        aditionalInfo.renderId === renderId
+          ? { ...aditionalInfo, description: newValue }
+          : aditionalInfo,
+      ),
+    );
+  };
+
   return (
     <form className="my-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
@@ -52,6 +121,7 @@ export default function ExperienceForm({ experienceInfo }) {
         <label className="text-sm font-normal flex flex-col">
           End Date
           <input
+            value={experienceInfo.endDate}
             type="text"
             name="endDate"
             disabled={experienceInfo.currentlyWorking}
@@ -75,20 +145,10 @@ export default function ExperienceForm({ experienceInfo }) {
       <div className="my-4">
         <h3 className="text-sm font-normal mb-2">Additional Information</h3>
 
-        <div className="flex flex-col gap-3">
-          {experienceInfo.additionalInfo.map((info, index) => (
-            <label key={info} className="text-sm font-normal flex flex-col">
-              Description {index + 1}
-              <textarea
-                value={info}
-                rows={3}
-                className={`w-full ${inputClassName}`}
-              />
-            </label>
-          ))}
-        </div>
+        <div className="flex flex-col gap-3">{aditionalInfosList}</div>
 
         <button
+          onClick={handleAddAdditionalInfo}
           type="button"
           className="mt-3 text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-1 rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
         >
