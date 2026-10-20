@@ -7,7 +7,7 @@ function generateId() {
   return crypto.randomUUID();
 }
 
-export default function ExperienceForm({ experienceInfo }) {
+export default function ExperienceForm({ experienceInfo, onChange }) {
   const [aditionalInfos, setAditionalInfos] = useState(
     experienceInfo.additionalInfo.map((info) => {
       return {
@@ -54,10 +54,8 @@ export default function ExperienceForm({ experienceInfo }) {
   };
 
   const handleDeleteAdditionalInfo = (renderId) => {
-    setAditionalInfos(
-      aditionalInfos.filter(
-        (aditionalInfo) => aditionalInfo.renderId !== renderId,
-      ),
+    setAditionalInfos((prev) =>
+      prev.filter((aditionalInfo) => aditionalInfo.renderId !== renderId),
     );
   };
 
@@ -71,6 +69,14 @@ export default function ExperienceForm({ experienceInfo }) {
     );
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    onChange((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   return (
     <form className="my-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
@@ -81,6 +87,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="company"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -91,6 +98,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="role"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -103,6 +111,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="location"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -115,6 +124,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="startDate"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -126,6 +136,7 @@ export default function ExperienceForm({ experienceInfo }) {
             name="endDate"
             disabled={experienceInfo.currentlyWorking}
             className={`${inputClassName} disabled:opacity-50 disabled:cursor-not-allowed`}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -137,6 +148,7 @@ export default function ExperienceForm({ experienceInfo }) {
             name="currentlyWorking"
             checked={experienceInfo.currentlyWorking}
             className="accent-blue-600 size-4 cursor-pointer"
+            onChange={handleChange}
           />
           Currently working here
         </label>
