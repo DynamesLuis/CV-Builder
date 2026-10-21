@@ -60,13 +60,16 @@ export default function ExperienceForm({ experienceInfo, onChange }) {
   };
 
   const handleChangeAdditionalInfo = (renderId, newValue) => {
-    setAditionalInfos((prev) =>
-      prev.map((aditionalInfo) =>
-        aditionalInfo.renderId === renderId
-          ? { ...aditionalInfo, description: newValue }
-          : aditionalInfo,
-      ),
+    const updatedAdditionalInfos = aditionalInfos.map((info) =>
+      info.renderId === renderId ? { ...info, description: newValue } : info,
     );
+
+    setAditionalInfos(updatedAdditionalInfos);
+
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
   };
 
   const handleChange = (e) => {
