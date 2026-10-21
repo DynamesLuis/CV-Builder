@@ -18,7 +18,7 @@ export default function ExperienceInfoCv({experienceData}) {
               <div className="text-right text-sm">
                 <p>{experience.location}</p>
                 <p>
-                  {experience.startDate} - {experience.endDate}
+                  {experience.startDate} - {experience.currentlyWorking ? "Present" : experience.endDate}
                 </p>
               </div>
             </div>
