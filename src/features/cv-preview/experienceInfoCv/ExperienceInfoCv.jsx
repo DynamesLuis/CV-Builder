@@ -24,8 +24,8 @@ export default function ExperienceInfoCv({experienceData}) {
             </div>
 
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
-              {experience.additionalInfo.map((item) => (
-                <li key={item.id}>{item.description}</li>
+              {experience.additionalInfo.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
