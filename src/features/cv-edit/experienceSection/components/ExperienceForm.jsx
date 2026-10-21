@@ -7,7 +7,12 @@ function generateId() {
   return crypto.randomUUID();
 }
 
-export default function ExperienceForm({ experienceInfo, onChange, onCancel }) {
+export default function ExperienceForm({
+  experienceInfo,
+  onChange,
+  onCancel,
+  onSave,
+}) {
   const [aditionalInfos, setAditionalInfos] = useState(
     experienceInfo.additionalInfo.map((info) => {
       return {
@@ -80,8 +85,15 @@ export default function ExperienceForm({ experienceInfo, onChange, onCancel }) {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave();
+    //use on cancel to setEditing(false)
+    onCancel();
+  };
+
   return (
-    <form className="my-4">
+    <form className="my-4" onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
         <label className="text-sm font-normal flex flex-col">
           Company

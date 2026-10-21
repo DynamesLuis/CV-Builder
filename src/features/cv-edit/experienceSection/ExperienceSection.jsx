@@ -18,6 +18,15 @@ export default function ExperienceSection({
     setIsEditing(false);
   };
 
+  const handleSaveClick = () => {
+    setCvData((prev) => ({
+      ...prev,
+      experience: prev.experience.map((experience) =>
+        experience.id === editData.id ? editData : experience,
+      ),
+    }));
+  };
+
   const handleAddExperienceClick = () => {
     setIsEditing(true);
     setEditData({
@@ -68,6 +77,7 @@ export default function ExperienceSection({
           experienceInfo={editData}
           onChange={setEditData}
           onCancel={handleCancelClick}
+          onSave={handleSaveClick}
         />
       ) : (
         <ExperienceInfoDisplay
