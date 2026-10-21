@@ -27,6 +27,9 @@ function App() {
         previewData.personalInfo = { ...editData };
         break;
       case "experience-section":
+        previewData.experience = previewData.experience.map((experience) =>
+          experience.id === editData.id ? editData : experience,
+        );
         break;
       case "education-section":
         break;
@@ -35,7 +38,7 @@ function App() {
       default:
         break;
     }
-  } 
+  }
 
   return (
     <div className="flex w-full p-5">
