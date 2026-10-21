@@ -40,6 +40,13 @@ export default function ExperienceSection({
     }
   };
 
+  const handleDeleteExperienceClick = (id) => {
+    setCvData(prev => ({
+      ...prev,
+      experience: prev.experience.filter(experience => experience.id !== id)
+    }))
+  }
+
   const handleAddExperienceClick = () => {
     setIsEditing(true);
     setExperienceAction("add");
@@ -97,6 +104,7 @@ export default function ExperienceSection({
         <ExperienceInfoDisplay
           experienceData={cvData.experience}
           onEdit={handleEditClick}
+          onDelete = {handleDeleteExperienceClick}
         />
       )}
     </div>

@@ -1,4 +1,4 @@
-export default function ExperienceCard({ experienceInfo, onEdit }) {
+export default function ExperienceCard({ experienceInfo, onEdit, onDelete }) {
   const dates = `${experienceInfo.startDate} - ${experienceInfo.currentlyWorking ? "Present" : experienceInfo.endDate}`;
   return (
     <article className="flex items-start justify-between gap-4 p-4 rounded-lg bg-slate-50 inset-ring-2 inset-ring-slate-100">
@@ -28,6 +28,7 @@ export default function ExperienceCard({ experienceInfo, onEdit }) {
           type="button"
           aria-label={`Delete ${experienceInfo.role} at ${experienceInfo.company}`}
           className="text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
+          onClick={() => onDelete(experienceInfo.id)}
         >
           Delete
         </button>
