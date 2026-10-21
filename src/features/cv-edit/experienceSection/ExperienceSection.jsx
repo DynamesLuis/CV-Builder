@@ -10,8 +10,12 @@ export default function ExperienceSection({
   setIsEditing,
 }) {
   const handleEditClick = (experience) => {
-    setEditData(experience)
+    setEditData(experience);
     setIsEditing(true);
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
   };
 
   const handleAddExperienceClick = () => {
@@ -60,9 +64,16 @@ export default function ExperienceSection({
         </button>
       </div>
       {isEditing ? (
-        <ExperienceForm experienceInfo={editData} onChange={setEditData}/>
+        <ExperienceForm
+          experienceInfo={editData}
+          onChange={setEditData}
+          onCancel={handleCancelClick}
+        />
       ) : (
-        <ExperienceInfoDisplay experienceData={cvData.experience} onEdit={handleEditClick}/>
+        <ExperienceInfoDisplay
+          experienceData={cvData.experience}
+          onEdit={handleEditClick}
+        />
       )}
     </div>
   );

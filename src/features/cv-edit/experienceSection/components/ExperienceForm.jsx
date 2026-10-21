@@ -7,7 +7,7 @@ function generateId() {
   return crypto.randomUUID();
 }
 
-export default function ExperienceForm({ experienceInfo, onChange }) {
+export default function ExperienceForm({ experienceInfo, onChange, onCancel }) {
   const [aditionalInfos, setAditionalInfos] = useState(
     experienceInfo.additionalInfo.map((info) => {
       return {
@@ -175,6 +175,7 @@ export default function ExperienceForm({ experienceInfo, onChange }) {
         <button
           type="button"
           className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
+          onClick={onCancel}
         >
           Cancel
         </button>
