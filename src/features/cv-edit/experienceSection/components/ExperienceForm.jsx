@@ -7,7 +7,12 @@ function generateId() {
   return crypto.randomUUID();
 }
 
-export default function ExperienceForm({ experienceInfo }) {
+export default function ExperienceForm({
+  experienceInfo,
+  onChange,
+  onCancel,
+  onSave,
+}) {
   const [aditionalInfos, setAditionalInfos] = useState(
     experienceInfo.additionalInfo.map((info) => {
       return {
@@ -54,25 +59,48 @@ export default function ExperienceForm({ experienceInfo }) {
   };
 
   const handleDeleteAdditionalInfo = (renderId) => {
-    setAditionalInfos(
-      aditionalInfos.filter(
-        (aditionalInfo) => aditionalInfo.renderId !== renderId,
-      ),
+    const updatedAdditionalInfos = aditionalInfos.filter(
+      (info) => info.renderId !== renderId,
     );
+
+    setAditionalInfos(updatedAdditionalInfos);
+
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
   };
 
   const handleChangeAdditionalInfo = (renderId, newValue) => {
-    setAditionalInfos((prev) =>
-      prev.map((aditionalInfo) =>
-        aditionalInfo.renderId === renderId
-          ? { ...aditionalInfo, description: newValue }
-          : aditionalInfo,
-      ),
+    const updatedAdditionalInfos = aditionalInfos.map((info) =>
+      info.renderId === renderId ? { ...info, description: newValue } : info,
     );
+
+    setAditionalInfos(updatedAdditionalInfos);
+
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    onChange((prevData) => ({
+      ...prevData,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave();
+    //use on cancel to setEditing(false)
+    onCancel();
   };
 
   return (
-    <form className="my-4">
+    <form className="my-4" onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
         <label className="text-sm font-normal flex flex-col">
           Company
@@ -81,6 +109,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="company"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -91,6 +120,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="role"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -103,6 +133,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="location"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -115,6 +146,7 @@ export default function ExperienceForm({ experienceInfo }) {
             type="text"
             name="startDate"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -126,6 +158,7 @@ export default function ExperienceForm({ experienceInfo }) {
             name="endDate"
             disabled={experienceInfo.currentlyWorking}
             className={`${inputClassName} disabled:opacity-50 disabled:cursor-not-allowed`}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -137,6 +170,7 @@ export default function ExperienceForm({ experienceInfo }) {
             name="currentlyWorking"
             checked={experienceInfo.currentlyWorking}
             className="accent-blue-600 size-4 cursor-pointer"
+            onChange={handleChange}
           />
           Currently working here
         </label>
@@ -160,6 +194,7 @@ export default function ExperienceForm({ experienceInfo }) {
         <button
           type="button"
           className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
+          onClick={onCancel}
         >
           Cancel
         </button>

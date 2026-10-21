@@ -1,4 +1,4 @@
-export default function ExperienceCard({ experienceInfo }) {
+export default function ExperienceCard({ experienceInfo, onEdit }) {
   const dates = `${experienceInfo.startDate} - ${experienceInfo.currentlyWorking ? "Present" : experienceInfo.endDate}`;
   return (
     <article className="flex items-start justify-between gap-4 p-4 rounded-lg bg-slate-50 inset-ring-2 inset-ring-slate-100">
@@ -19,6 +19,7 @@ export default function ExperienceCard({ experienceInfo }) {
           type="button"
           aria-label={`Edit ${experienceInfo.role} at ${experienceInfo.company}`}
           className="text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out"
+          onClick={() => onEdit(experienceInfo)}
         >
           Edit
         </button>

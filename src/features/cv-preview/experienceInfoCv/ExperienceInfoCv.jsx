@@ -18,14 +18,14 @@ export default function ExperienceInfoCv({experienceData}) {
               <div className="text-right text-sm">
                 <p>{experience.location}</p>
                 <p>
-                  {experience.startDate} - {experience.endDate}
+                  {experience.startDate} - {experience.currentlyWorking ? "Present" : experience.endDate}
                 </p>
               </div>
             </div>
 
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
-              {experience.additionalInfo.map((item) => (
-                <li key={item.id}>{item.description}</li>
+              {experience.additionalInfo.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
