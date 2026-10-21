@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ExperienceForm from "./components/ExperienceForm";
 import ExperienceInfoDisplay from "./components/ExperienceInfoDisplay";
 import generateId from "../../../helpers/generateId";
@@ -10,9 +9,10 @@ export default function ExperienceSection({
   setEditData,
   isEditing,
   setIsEditing,
+  setExperienceAction,
+  experienceAction
 }) {
-  const [experienceAction, setExperienceAction] = useState("");
-
+  
   const handleEditClick = (experience) => {
     setEditData(experience);
     setIsEditing(true);
