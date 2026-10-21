@@ -1,11 +1,10 @@
 import { useState } from "react";
+import generateId from "../../../../helpers/generateId";
 
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
-function generateId() {
-  return crypto.randomUUID();
-}
+
 
 export default function ExperienceForm({
   experienceInfo,
