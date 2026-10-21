@@ -1,5 +1,7 @@
+import { useState } from "react";
 import ExperienceForm from "./components/ExperienceForm";
 import ExperienceInfoDisplay from "./components/ExperienceInfoDisplay";
+import generateId from "../../../helpers/generateId";
 
 export default function ExperienceSection({
   cvData,
@@ -9,28 +11,40 @@ export default function ExperienceSection({
   isEditing,
   setIsEditing,
 }) {
+  const [experienceAction, setExperienceAction] = useState("");
+
   const handleEditClick = (experience) => {
     setEditData(experience);
     setIsEditing(true);
+    setExperienceAction("edit");
   };
 
   const handleCancelClick = () => {
     setIsEditing(false);
+    setExperienceAction("");
   };
 
   const handleSaveClick = () => {
-    setCvData((prev) => ({
-      ...prev,
-      experience: prev.experience.map((experience) =>
-        experience.id === editData.id ? editData : experience,
-      ),
-    }));
+    if (experienceAction === "edit") {
+      setCvData((prev) => ({
+        ...prev,
+        experience: prev.experience.map((experience) =>
+          experience.id === editData.id ? editData : experience,
+        ),
+      }));
+    } else if (experienceAction === "add") {
+      setCvData((prev) => ({
+        ...prev,
+        experience: [...prev.experience, editData],
+      }));
+    }
   };
 
   const handleAddExperienceClick = () => {
     setIsEditing(true);
+    setExperienceAction("add");
     setEditData({
-      id: "",
+      id: generateId(),
       company: "",
       role: "",
       location: "",
