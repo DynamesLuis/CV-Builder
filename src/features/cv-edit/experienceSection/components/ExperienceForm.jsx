@@ -59,9 +59,16 @@ export default function ExperienceForm({
   };
 
   const handleDeleteAdditionalInfo = (renderId) => {
-    setAditionalInfos((prev) =>
-      prev.filter((aditionalInfo) => aditionalInfo.renderId !== renderId),
+    const updatedAdditionalInfos = aditionalInfos.filter(
+      (info) => info.renderId !== renderId,
     );
+
+    setAditionalInfos(updatedAdditionalInfos);
+
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
   };
 
   const handleChangeAdditionalInfo = (renderId, newValue) => {
