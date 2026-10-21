@@ -20,6 +20,7 @@ function App() {
   const [activeSection, setActiveSection] = useState("personal-info-section");
   const [editData, setEditData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
+  const [formAction, setFormAction] = useState("");
   let previewData = structuredClone(cvData);
   if (isEditing) {
     switch (activeSection) {
@@ -27,9 +28,13 @@ function App() {
         previewData.personalInfo = { ...editData };
         break;
       case "experience-section":
-        previewData.experience = previewData.experience.map((experience) =>
-          experience.id === editData.id ? editData : experience,
-        );
+        if (formAction === "edit") {
+          previewData.experience = previewData.experience.map((experience) =>
+            experience.id === editData.id ? editData : experience,
+          );
+        } else if(formAction === "add") {
+          previewData.experience = [...previewData.experience, editData]
+        }
         break;
       case "education-section":
         break;
@@ -51,6 +56,8 @@ function App() {
         setIsEditing={setIsEditing}
         activeSection={activeSection}
         setActiveSection={setActiveSection}
+        formAction={formAction}
+        setFormAction={setFormAction}
       />
       <CvPreview cvData={previewData} />
     </div>
