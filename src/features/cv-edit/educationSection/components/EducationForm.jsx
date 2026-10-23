@@ -1,4 +1,4 @@
-export default function EducationForm({educationData}) {
+export default function EducationForm({educationData, onCancel}) {
   const inputClassName =
     "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
@@ -118,6 +118,7 @@ export default function EducationForm({educationData}) {
         <button
           type="button"
           className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
+          onClick={onCancel}
         >
           Cancel
         </button>
