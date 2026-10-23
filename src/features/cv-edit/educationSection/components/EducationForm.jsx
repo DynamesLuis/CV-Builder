@@ -1,14 +1,34 @@
 import { useState } from "react";
+import generateId from "../../../../helpers/generateId";
 
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
 export default function EducationForm({ educationData, onCancel }) {
   const [additionalInfo, setAdditionalInfo] = useState(
-    educationData.additionalInfo,
+    educationData.additionalInfo.map((info) => {
+      return {
+        renderId: generateId(),
+        description: info,
+      };
+    }),
   );
+
+  const handleAddNewAdditionalInfo = () => {
+    setAdditionalInfo((prev) => [
+      ...prev,
+      { renderId: generateId(), description: "" },
+    ]);
+  };
+
+  const handleDeleteAdditionalInfo = (renderId) => {
+    setAdditionalInfo((prev) =>
+      prev.filter((info) => info.renderId !== renderId),
+    );
+  };
+
   const additionalInfoList = additionalInfo.map((info, index) => (
-    <div key={index} className="flex flex-col">
+    <div key={info.renderId} className="flex flex-col">
       <label
         htmlFor={`education-description-${index}`}
         className="text-sm font-normal"
@@ -18,7 +38,7 @@ export default function EducationForm({ educationData, onCancel }) {
 
       <textarea
         id={`education-description-${index}`}
-        value={info}
+        value={info.description}
         rows={3}
         className={`w-full ${inputClassName}`}
       />
@@ -26,6 +46,7 @@ export default function EducationForm({ educationData, onCancel }) {
       <button
         type="button"
         className="self-end mt-2 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
+        onClick={() => handleDeleteAdditionalInfo(info.renderId)}
       >
         Delete
       </button>
@@ -111,6 +132,7 @@ export default function EducationForm({ educationData, onCancel }) {
         <button
           type="button"
           className="mt-3 text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-1 rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
+          onClick={handleAddNewAdditionalInfo}
         >
           + Add Additional Information
         </button>
