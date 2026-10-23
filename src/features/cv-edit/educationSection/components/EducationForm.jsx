@@ -1,10 +1,39 @@
-export default function EducationForm({educationData, onCancel}) {
-  const inputClassName =
-    "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
+import { useState } from "react";
 
-  return(
-    <form className="my-4" >
-      
+const inputClassName =
+  "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
+
+export default function EducationForm({ educationData, onCancel }) {
+  const [additionalInfo, setAdditionalInfo] = useState(
+    educationData.additionalInfo,
+  );
+  const additionalInfoList = additionalInfo.map((info, index) => (
+    <div key={index} className="flex flex-col">
+      <label
+        htmlFor={`education-description-${index}`}
+        className="text-sm font-normal"
+      >
+        Description {index + 1}
+      </label>
+
+      <textarea
+        id={`education-description-${index}`}
+        value={info}
+        rows={3}
+        className={`w-full ${inputClassName}`}
+      />
+
+      <button
+        type="button"
+        className="self-end mt-2 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
+      >
+        Delete
+      </button>
+    </div>
+  ));
+
+  return (
+    <form className="my-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
         <label className="text-sm font-normal flex flex-col">
           Institution
@@ -75,36 +104,9 @@ export default function EducationForm({educationData, onCancel}) {
       </div>
 
       <div className="my-4">
-        <h3 className="text-sm font-normal mb-2">
-          Additional Information
-        </h3>
+        <h3 className="text-sm font-normal mb-2">Additional Information</h3>
 
-        <div className="flex flex-col gap-3">
-          {educationData.additionalInfo.map((info, index) => (
-            <div key={index} className="flex flex-col">
-              <label
-                htmlFor={`education-description-${index}`}
-                className="text-sm font-normal"
-              >
-                Description {index + 1}
-              </label>
-
-              <textarea
-                id={`education-description-${index}`}
-                value={info}
-                rows={3}
-                className={`w-full ${inputClassName}`}
-              />
-
-              <button
-                type="button"
-                className="self-end mt-2 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
+        <div className="flex flex-col gap-3">{additionalInfoList}</div>
 
         <button
           type="button"
@@ -131,5 +133,5 @@ export default function EducationForm({educationData, onCancel}) {
         </button>
       </div>
     </form>
-  )
+  );
 }
