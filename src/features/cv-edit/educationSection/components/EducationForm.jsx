@@ -91,7 +91,7 @@ export default function EducationForm({educationData}) {
 
               <textarea
                 id={`education-description-${index}`}
-                value={info.description}
+                value={info}
                 rows={3}
                 className={`w-full ${inputClassName}`}
               />
