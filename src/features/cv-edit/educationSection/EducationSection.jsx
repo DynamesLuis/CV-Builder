@@ -20,7 +20,7 @@ export default function EducationSection({
   const handleCancelClick = () => {
     setIsEditing(false);
     setEducationAction("");
-  }
+  };
 
   return (
     <div className="my-4">
@@ -34,7 +34,11 @@ export default function EducationSection({
         </button>
       </div>
       {isEditing ? (
-        <EducationForm educationData={editData} onCancel={handleCancelClick}/>
+        <EducationForm
+          educationData={editData}
+          onCancel={handleCancelClick}
+          onChange={setEditData}
+        />
       ) : (
         <EducationDisplay
           educationData={cvData.education}

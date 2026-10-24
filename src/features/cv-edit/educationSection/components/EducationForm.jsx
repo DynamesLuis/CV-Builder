@@ -4,7 +4,7 @@ import generateId from "../../../../helpers/generateId";
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
-export default function EducationForm({ educationData, onCancel }) {
+export default function EducationForm({ educationData, onCancel, onChange }) {
   const [additionalInfo, setAdditionalInfo] = useState(
     educationData.additionalInfo.map((info) => {
       return {
@@ -25,6 +25,14 @@ export default function EducationForm({ educationData, onCancel }) {
     setAdditionalInfo((prev) =>
       prev.filter((info) => info.renderId !== renderId),
     );
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    onChange((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const additionalInfoList = additionalInfo.map((info, index) => (
@@ -63,6 +71,7 @@ export default function EducationForm({ educationData, onCancel }) {
             type="text"
             name="institution"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -73,6 +82,7 @@ export default function EducationForm({ educationData, onCancel }) {
             type="text"
             name="fieldOfStudy"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -85,6 +95,7 @@ export default function EducationForm({ educationData, onCancel }) {
             type="text"
             name="location"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -97,6 +108,7 @@ export default function EducationForm({ educationData, onCancel }) {
             type="date"
             name="startDate"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -108,6 +120,7 @@ export default function EducationForm({ educationData, onCancel }) {
             name="endDate"
             disabled={educationData.currentlyStudying}
             className={`${inputClassName} disabled:opacity-50 disabled:cursor-not-allowed`}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -119,6 +132,7 @@ export default function EducationForm({ educationData, onCancel }) {
             name="currentlyStudying"
             checked={educationData.currentlyStudying}
             className="accent-blue-600 size-4 cursor-pointer"
+             onChange={handleChange}
           />
           Currently studying here
         </label>
