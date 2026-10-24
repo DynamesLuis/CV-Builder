@@ -5,7 +5,7 @@ const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
 export default function EducationForm({ educationData, onCancel, onChange }) {
-  const [additionalInfo, setAdditionalInfo] = useState(
+  const [additionalInfos, setAdditionalInfo] = useState(
     educationData.additionalInfo.map((info) => {
       return {
         renderId: generateId(),
@@ -27,6 +27,19 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
     );
   };
 
+  const handleChangeAdditionalInfo = (renderId, newValue) => {
+    const updatedAdditionalInfos = additionalInfos.map((info) =>
+      info.renderId === renderId ? { ...info, description: newValue } : info,
+    );
+
+    setAdditionalInfo(updatedAdditionalInfos);
+
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
+  };
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     onChange((prev) => ({
@@ -35,7 +48,7 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
     }));
   };
 
-  const additionalInfoList = additionalInfo.map((info, index) => (
+  const additionalInfoList = additionalInfos.map((info, index) => (
     <div key={info.renderId} className="flex flex-col">
       <label
         htmlFor={`education-description-${index}`}
@@ -49,6 +62,7 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
         value={info.description}
         rows={3}
         className={`w-full ${inputClassName}`}
+        onChange={(e) => handleChangeAdditionalInfo(info.renderId, e.target.value)}
       />
 
       <button
@@ -132,7 +146,7 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
             name="currentlyStudying"
             checked={educationData.currentlyStudying}
             className="accent-blue-600 size-4 cursor-pointer"
-             onChange={handleChange}
+            onChange={handleChange}
           />
           Currently studying here
         </label>
