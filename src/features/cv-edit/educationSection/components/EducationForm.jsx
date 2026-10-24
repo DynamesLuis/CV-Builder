@@ -22,9 +22,14 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
   };
 
   const handleDeleteAdditionalInfo = (renderId) => {
-    setAdditionalInfo((prev) =>
-      prev.filter((info) => info.renderId !== renderId),
+    const updatedAdditionalInfos = additionalInfos.filter(
+      (info) => info.renderId !== renderId,
     );
+    setAdditionalInfo(updatedAdditionalInfos);
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
   };
 
   const handleChangeAdditionalInfo = (renderId, newValue) => {
@@ -62,7 +67,9 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
         value={info.description}
         rows={3}
         className={`w-full ${inputClassName}`}
-        onChange={(e) => handleChangeAdditionalInfo(info.renderId, e.target.value)}
+        onChange={(e) =>
+          handleChangeAdditionalInfo(info.renderId, e.target.value)
+        }
       />
 
       <button
