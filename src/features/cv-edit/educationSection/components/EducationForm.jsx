@@ -4,7 +4,7 @@ import generateId from "../../../../helpers/generateId";
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
-export default function EducationForm({ educationData, onCancel, onChange }) {
+export default function EducationForm({ educationData, onCancel, onChange, onSave }) {
   const [additionalInfos, setAdditionalInfo] = useState(
     educationData.additionalInfo.map((info) => {
       return {
@@ -53,6 +53,13 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
     }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave();
+    //use on cancel to setEditing(false)
+    onCancel();
+  }
+
   const additionalInfoList = additionalInfos.map((info, index) => (
     <div key={info.renderId} className="flex flex-col">
       <label
@@ -83,7 +90,7 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
   ));
 
   return (
-    <form className="my-4">
+    <form className="my-4" onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
         <label className="text-sm font-normal flex flex-col">
           Institution

@@ -22,6 +22,22 @@ export default function EducationSection({
     setEducationAction("");
   };
 
+  const handleSaveClick = () => {
+    if (educationAction === "edit") {
+      setCvData((prev) => ({
+        ...prev,
+        education: prev.education.map((educationInfo) =>
+          educationInfo.id === editData.id ? editData : educationInfo,
+        ),
+      }));
+    } else if (educationAction === "add") {
+      setCvData(prev => ({
+        ...prev,
+        education: [...prev.education, editData]
+      }))
+    }
+  };
+
   return (
     <div className="my-4">
       <h2 className="font-bold text-lg">Education</h2>
@@ -38,6 +54,7 @@ export default function EducationSection({
           educationData={editData}
           onCancel={handleCancelClick}
           onChange={setEditData}
+          onSave={handleSaveClick}
         />
       ) : (
         <EducationDisplay
