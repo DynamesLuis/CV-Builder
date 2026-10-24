@@ -20,7 +20,23 @@ export default function EducationSection({
   const handleCancelClick = () => {
     setIsEditing(false);
     setEducationAction("");
-  }
+  };
+
+  const handleSaveClick = () => {
+    if (educationAction === "edit") {
+      setCvData((prev) => ({
+        ...prev,
+        education: prev.education.map((educationInfo) =>
+          educationInfo.id === editData.id ? editData : educationInfo,
+        ),
+      }));
+    } else if (educationAction === "add") {
+      setCvData(prev => ({
+        ...prev,
+        education: [...prev.education, editData]
+      }))
+    }
+  };
 
   return (
     <div className="my-4">
@@ -34,7 +50,12 @@ export default function EducationSection({
         </button>
       </div>
       {isEditing ? (
-        <EducationForm educationData={editData} onCancel={handleCancelClick}/>
+        <EducationForm
+          educationData={editData}
+          onCancel={handleCancelClick}
+          onChange={setEditData}
+          onSave={handleSaveClick}
+        />
       ) : (
         <EducationDisplay
           educationData={cvData.education}

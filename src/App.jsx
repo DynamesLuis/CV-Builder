@@ -32,11 +32,18 @@ function App() {
           previewData.experience = previewData.experience.map((experience) =>
             experience.id === editData.id ? editData : experience,
           );
-        } else if(formAction === "add") {
-          previewData.experience = [...previewData.experience, editData]
+        } else if (formAction === "add") {
+          previewData.experience = [...previewData.experience, editData];
         }
         break;
       case "education-section":
+        if (formAction === "edit") {
+          previewData.education = previewData.education.map((education) =>
+            education.id === editData.id ? editData : education,
+          );
+        } else if (formAction === "add") {
+          previewData.education = [...previewData.education, editData];
+        }
         break;
       case "skills-section":
         break;

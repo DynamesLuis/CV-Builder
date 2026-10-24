@@ -1,10 +1,96 @@
-export default function EducationForm({educationData, onCancel}) {
-  const inputClassName =
-    "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
+import { useState } from "react";
+import generateId from "../../../../helpers/generateId";
 
-  return(
-    <form className="my-4" >
-      
+const inputClassName =
+  "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
+
+export default function EducationForm({ educationData, onCancel, onChange, onSave }) {
+  const [additionalInfos, setAdditionalInfo] = useState(
+    educationData.additionalInfo.map((info) => {
+      return {
+        renderId: generateId(),
+        description: info,
+      };
+    }),
+  );
+
+  const handleAddNewAdditionalInfo = () => {
+    setAdditionalInfo((prev) => [
+      ...prev,
+      { renderId: generateId(), description: "" },
+    ]);
+  };
+
+  const handleDeleteAdditionalInfo = (renderId) => {
+    const updatedAdditionalInfos = additionalInfos.filter(
+      (info) => info.renderId !== renderId,
+    );
+    setAdditionalInfo(updatedAdditionalInfos);
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
+  };
+
+  const handleChangeAdditionalInfo = (renderId, newValue) => {
+    const updatedAdditionalInfos = additionalInfos.map((info) =>
+      info.renderId === renderId ? { ...info, description: newValue } : info,
+    );
+
+    setAdditionalInfo(updatedAdditionalInfos);
+
+    onChange((prevData) => ({
+      ...prevData,
+      additionalInfo: updatedAdditionalInfos.map((info) => info.description),
+    }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    onChange((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave();
+    //use on cancel to setEditing(false)
+    onCancel();
+  }
+
+  const additionalInfoList = additionalInfos.map((info, index) => (
+    <div key={info.renderId} className="flex flex-col">
+      <label
+        htmlFor={`education-description-${index}`}
+        className="text-sm font-normal"
+      >
+        Description {index + 1}
+      </label>
+
+      <textarea
+        id={`education-description-${index}`}
+        value={info.description}
+        rows={3}
+        className={`w-full ${inputClassName}`}
+        onChange={(e) =>
+          handleChangeAdditionalInfo(info.renderId, e.target.value)
+        }
+      />
+
+      <button
+        type="button"
+        className="self-end mt-2 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
+        onClick={() => handleDeleteAdditionalInfo(info.renderId)}
+      >
+        Delete
+      </button>
+    </div>
+  ));
+
+  return (
+    <form className="my-4" onSubmit={handleSubmit}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-2">
         <label className="text-sm font-normal flex flex-col">
           Institution
@@ -13,6 +99,7 @@ export default function EducationForm({educationData, onCancel}) {
             type="text"
             name="institution"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -23,6 +110,7 @@ export default function EducationForm({educationData, onCancel}) {
             type="text"
             name="fieldOfStudy"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -35,6 +123,7 @@ export default function EducationForm({educationData, onCancel}) {
             type="text"
             name="location"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -44,9 +133,10 @@ export default function EducationForm({educationData, onCancel}) {
           Start Date
           <input
             value={educationData.startDate}
-            type="date"
+            type="text"
             name="startDate"
             className={inputClassName}
+            onChange={handleChange}
           />
         </label>
 
@@ -54,10 +144,11 @@ export default function EducationForm({educationData, onCancel}) {
           End Date
           <input
             value={educationData.endDate}
-            type="date"
+            type="text"
             name="endDate"
             disabled={educationData.currentlyStudying}
             className={`${inputClassName} disabled:opacity-50 disabled:cursor-not-allowed`}
+            onChange={handleChange}
           />
         </label>
       </div>
@@ -69,46 +160,21 @@ export default function EducationForm({educationData, onCancel}) {
             name="currentlyStudying"
             checked={educationData.currentlyStudying}
             className="accent-blue-600 size-4 cursor-pointer"
+            onChange={handleChange}
           />
           Currently studying here
         </label>
       </div>
 
       <div className="my-4">
-        <h3 className="text-sm font-normal mb-2">
-          Additional Information
-        </h3>
+        <h3 className="text-sm font-normal mb-2">Additional Information</h3>
 
-        <div className="flex flex-col gap-3">
-          {educationData.additionalInfo.map((info, index) => (
-            <div key={index} className="flex flex-col">
-              <label
-                htmlFor={`education-description-${index}`}
-                className="text-sm font-normal"
-              >
-                Description {index + 1}
-              </label>
-
-              <textarea
-                id={`education-description-${index}`}
-                value={info}
-                rows={3}
-                className={`w-full ${inputClassName}`}
-              />
-
-              <button
-                type="button"
-                className="self-end mt-2 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
+        <div className="flex flex-col gap-3">{additionalInfoList}</div>
 
         <button
           type="button"
           className="mt-3 text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-1 rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
+          onClick={handleAddNewAdditionalInfo}
         >
           + Add Additional Information
         </button>
@@ -131,5 +197,5 @@ export default function EducationForm({educationData, onCancel}) {
         </button>
       </div>
     </form>
-  )
+  );
 }
