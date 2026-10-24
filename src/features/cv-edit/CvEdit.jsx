@@ -15,7 +15,7 @@ export default function CvEdit({
   activeSection,
   setActiveSection,
   formAction,
-  setFormAction
+  setFormAction,
 }) {
   return (
     <div className="flex-1">
@@ -46,7 +46,18 @@ export default function CvEdit({
           setExperienceAction={setFormAction}
         />
       )}
-      {activeSection === "education-section" && <EducationSection />}
+      {activeSection === "education-section" && (
+        <EducationSection
+          cvData={cvData}
+          setCvData={setCvData}
+          editData={editData}
+          setEditData={setEditData}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          educationAction={formAction}
+          setEducationAction={setFormAction}
+        />
+      )}
       {activeSection === "skills-section" && <AdditionalSkillsSection />}
     </div>
   );
