@@ -119,7 +119,7 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
           Start Date
           <input
             value={educationData.startDate}
-            type="date"
+            type="text"
             name="startDate"
             className={inputClassName}
             onChange={handleChange}
@@ -130,7 +130,7 @@ export default function EducationForm({ educationData, onCancel, onChange }) {
           End Date
           <input
             value={educationData.endDate}
-            type="date"
+            type="text"
             name="endDate"
             disabled={educationData.currentlyStudying}
             className={`${inputClassName} disabled:opacity-50 disabled:cursor-not-allowed`}
