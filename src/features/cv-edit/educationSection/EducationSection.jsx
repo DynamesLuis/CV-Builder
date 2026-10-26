@@ -1,3 +1,4 @@
+import generateId from "../../../helpers/generateId";
 import EducationDisplay from "./components/EducationDisplay";
 import EducationForm from "./components/EducationForm";
 
@@ -22,6 +23,21 @@ export default function EducationSection({
     setEducationAction("");
   };
 
+  const handleAddEducationClick = () => {
+    setIsEditing(true);
+    setEducationAction("add");
+    setEditData({
+      id: generateId(),
+      institution: "",
+      location: "",
+      startDate: "",
+      endDate: "",
+      fieldOfStudy: "",
+      currentlyStudying: false,
+      additionalInfo: [],
+    });
+  };
+
   const handleSaveClick = () => {
     if (educationAction === "edit") {
       setCvData((prev) => ({
@@ -31,10 +47,10 @@ export default function EducationSection({
         ),
       }));
     } else if (educationAction === "add") {
-      setCvData(prev => ({
+      setCvData((prev) => ({
         ...prev,
-        education: [...prev.education, editData]
-      }))
+        education: [...prev.education, editData],
+      }));
     }
   };
 
@@ -45,7 +61,10 @@ export default function EducationSection({
         <p className="text-xs text-slate-600 font-normal">
           Academic degrees, certifications, and valuable specializations
         </p>
-        <button className="flex items-center text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out">
+        <button
+          onClick={handleAddEducationClick}
+          className="flex items-center text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out"
+        >
           Add education
         </button>
       </div>
