@@ -58,7 +58,15 @@ export default function CvEdit({
           setEducationAction={setFormAction}
         />
       )}
-      {activeSection === "skills-section" && <AdditionalSkillsSection />}
+      {activeSection === "skills-section" && (
+        <AdditionalSkillsSection
+          cvData={cvData}
+          setIsEditing={setIsEditing}
+          isEditing={isEditing}
+          editData={editData}
+          setEditData={setEditData}
+        />
+      )}
     </div>
   );
 }
