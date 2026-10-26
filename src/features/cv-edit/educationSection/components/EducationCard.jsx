@@ -1,4 +1,4 @@
-export default function EducationCard({ educationInfo, onEdit }) {
+export default function EducationCard({ educationInfo, onEdit, onDelete }) {
   const dates = `${educationInfo.startDate} - ${educationInfo.currentlyStudying ? "Present" : educationInfo.endDate}`;
 
   return (
@@ -26,6 +26,7 @@ export default function EducationCard({ educationInfo, onEdit }) {
         </button>
 
         <button
+          onClick={() => onDelete(educationInfo.id)}
           type="button"
           aria-label={`Delete ${educationInfo.fieldOfStudy} at ${educationInfo.institution}`}
           className="text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"

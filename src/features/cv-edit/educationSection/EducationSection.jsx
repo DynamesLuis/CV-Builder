@@ -54,6 +54,13 @@ export default function EducationSection({
     }
   };
 
+  const handleDeleteEducationClick = (id) => {
+    setCvData((prev) => ({
+      ...prev,
+      education: prev.education.filter((education) => education.id !== id),
+    }));
+  };
+
   return (
     <div className="my-4">
       <h2 className="font-bold text-lg">Education</h2>
@@ -79,6 +86,7 @@ export default function EducationSection({
         <EducationDisplay
           educationData={cvData.education}
           onEdit={handleEditClick}
+          onDelete={handleDeleteEducationClick}
         />
       )}
     </div>
