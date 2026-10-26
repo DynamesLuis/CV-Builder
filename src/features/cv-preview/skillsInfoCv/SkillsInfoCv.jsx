@@ -6,8 +6,8 @@ export default function SkillsInfoCv({ skillsData }) {
       <SectionTitle title="Skills" />
 
       <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
-        {skillsData.map((item) => (
-          <li key={item.id}>{item.description}</li>
+        {skillsData.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
     </section>
