@@ -6,8 +6,13 @@ export default function AdditionalSkillsSection({
   setIsEditing,
   isEditing,
   editData,
-  setEditData
+  setEditData,
 }) {
+  const handleEditClick = () => {
+    setIsEditing(true);
+    setEditData(cvData.skills);
+  };
+
   return (
     <div className="my-4">
       <h2 className="font-bold text-lg">Additional Skills</h2>
@@ -17,6 +22,7 @@ export default function AdditionalSkillsSection({
         </p>
         <div className="flex justify-end gap-3 mt-4">
           <button
+            onClick={handleEditClick}
             type="button"
             className="text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out"
           >
@@ -25,7 +31,7 @@ export default function AdditionalSkillsSection({
         </div>
       </div>
       {isEditing ? (
-        <AdditionalSkillsForm skills={editData}/>
+        <AdditionalSkillsForm skills={editData} />
       ) : (
         <AdditionalSkillsDisplay additionalSkills={cvData.skills} />
       )}
