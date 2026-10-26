@@ -18,14 +18,14 @@ export default function EducationInfoCv({educationData}) {
               <div className="text-right text-sm">
                 <p>{education.location}</p>
                 <p>
-                  {education.startDate} - {education.endDate}
+                  {education.startDate} - {education.currentlyStudying ? "Present" : education.endDate}
                 </p>
               </div>
             </div>
 
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
-              {education.additionalInfo.map((item) => (
-                <li key={item.id}>{item.description}</li>
+              {education.additionalInfo.map((item, index) => (
+                <li key={index}>{item}</li>
               ))}
             </ul>
           </div>
