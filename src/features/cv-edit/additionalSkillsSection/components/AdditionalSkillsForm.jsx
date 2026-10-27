@@ -3,7 +3,7 @@ import { useState } from "react";
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
-export default function AdditionalSkillsForm({ skills }) {
+export default function AdditionalSkillsForm({ skills, onChange }) {
   const [skillsInfo, setSkillsInfo] = useState(skills);
   const skillsList = skillsInfo.map((skill, index) => {
     return (
@@ -19,6 +19,7 @@ export default function AdditionalSkillsForm({ skills }) {
             name={`skill-${index}`}
             value={skill}
             className={`w-full ${inputClassName}`}
+            onChange={(e) => handleOnChange(index, e.target.value)}
           />
 
           <button
@@ -34,6 +35,14 @@ export default function AdditionalSkillsForm({ skills }) {
 
   const handleAddSkill = () => {
     setSkillsInfo((prev) => [...prev, " "]);
+  };
+
+  const handleOnChange = (indexToChange, newValue) => {
+    const updatedSkills = skillsInfo.map((skill, index) => (index === indexToChange ? newValue : skill))
+
+    setSkillsInfo(updatedSkills);
+
+    onChange(updatedSkills)
   };
 
   return (
