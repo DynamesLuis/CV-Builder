@@ -22,6 +22,7 @@ export default function CvEdit({
       <EditNav
         activeSection={activeSection}
         onChangeSection={setActiveSection}
+        setIsEditing={setIsEditing}
       />
       {activeSection === "layout-section" && <LayoutSection />}
       {activeSection === "personal-info-section" && (
