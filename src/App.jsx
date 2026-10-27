@@ -16,7 +16,7 @@ function App() {
     education: [],
     skills: [],
   });
-
+  const [selectedLayout, setSelectedLayout] = useState("harvard");
   const [activeSection, setActiveSection] = useState("personal-info-section");
   const [editData, setEditData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -67,7 +67,7 @@ function App() {
         formAction={formAction}
         setFormAction={setFormAction}
       />
-      <CvPreview cvData={previewData} />
+      <CvPreview cvData={previewData} selectedLayout={selectedLayout}/>
     </div>
   );
 }
