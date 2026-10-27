@@ -46,6 +46,7 @@ function App() {
         }
         break;
       case "skills-section":
+        previewData.skills = [...editData];
         break;
       default:
         break;
