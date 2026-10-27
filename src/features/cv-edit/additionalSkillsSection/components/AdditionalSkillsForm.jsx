@@ -23,6 +23,7 @@ export default function AdditionalSkillsForm({ skills, onChange }) {
           />
 
           <button
+            onClick={() => handleDeleteSkill(index)}
             type="button"
             className="shrink-0 text-sm bg-red-50 hover:bg-red-100 cursor-pointer px-3 py-1 rounded-lg font-bold text-red-700 transition-all duration-300 ease-in-out"
           >
@@ -37,12 +38,20 @@ export default function AdditionalSkillsForm({ skills, onChange }) {
     setSkillsInfo((prev) => [...prev, " "]);
   };
 
-  const handleOnChange = (indexToChange, newValue) => {
-    const updatedSkills = skillsInfo.map((skill, index) => (index === indexToChange ? newValue : skill))
+  const handleDeleteSkill = (indexToDelete) => {
+    const updatedSkills = skillsInfo.filter(
+      (_, index) => index !== indexToDelete,
+    );
 
     setSkillsInfo(updatedSkills);
+  };
 
-    onChange(updatedSkills)
+  const handleOnChange = (indexToChange, newValue) => {
+    const updatedSkills = skillsInfo.map((skill, index) =>
+      index === indexToChange ? newValue : skill,
+    );
+    setSkillsInfo(updatedSkills);
+    onChange(updatedSkills);
   };
 
   return (
