@@ -3,6 +3,7 @@ import AdditionalSkillsForm from "./components/AdditionalSkillsForm";
 
 export default function AdditionalSkillsSection({
   cvData,
+  setCvData,
   setIsEditing,
   isEditing,
   editData,
@@ -11,6 +12,17 @@ export default function AdditionalSkillsSection({
   const handleEditClick = () => {
     setIsEditing(true);
     setEditData(cvData.skills);
+  };
+
+  const handleSaveClick = () => {
+    setCvData((prev) => ({
+      ...prev,
+      skills: editData,
+    }));
+  };
+
+  const handleCancelClick = () => {
+    setIsEditing(false);
   };
 
   return (
@@ -31,7 +43,12 @@ export default function AdditionalSkillsSection({
         </div>
       </div>
       {isEditing ? (
-        <AdditionalSkillsForm skills={editData} />
+        <AdditionalSkillsForm
+          skills={editData}
+          onCancel={handleCancelClick}
+          onChange={setEditData}
+          onSave={handleSaveClick}
+        />
       ) : (
         <AdditionalSkillsDisplay additionalSkills={cvData.skills} />
       )}

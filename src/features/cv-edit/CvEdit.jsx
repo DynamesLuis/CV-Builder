@@ -61,6 +61,7 @@ export default function CvEdit({
       {activeSection === "skills-section" && (
         <AdditionalSkillsSection
           cvData={cvData}
+          setCvData={setCvData}
           setIsEditing={setIsEditing}
           isEditing={isEditing}
           editData={editData}

@@ -3,7 +3,12 @@ import { useState } from "react";
 const inputClassName =
   "my-1 text-base font-light rounded-lg outline-none pl-3 py-1 bg-slate-50 focus:ring-2 focus:ring-slate-400 inset-ring-2 inset-ring-slate-100";
 
-export default function AdditionalSkillsForm({ skills, onChange }) {
+export default function AdditionalSkillsForm({
+  skills,
+  onChange,
+  onSave,
+  onCancel,
+}) {
   const [skillsInfo, setSkillsInfo] = useState(skills);
   const skillsList = skillsInfo.map((skill, index) => {
     return (
@@ -55,8 +60,15 @@ export default function AdditionalSkillsForm({ skills, onChange }) {
     onChange(updatedSkills);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave();
+    //use on cancel to setEditing(false)
+    onCancel();
+  };
+
   return (
-    <form className="my-4">
+    <form className="my-4" onSubmit={handleSubmit}>
       <div className="flex flex-col gap-3 my-2">{skillsList}</div>
 
       <button
@@ -69,6 +81,7 @@ export default function AdditionalSkillsForm({ skills, onChange }) {
 
       <div className="flex justify-end gap-3 mt-4">
         <button
+          onClick={onCancel}
           type="button"
           className="text-sm bg-blue-50 hover:bg-blue-100 cursor-pointer px-4 py-px rounded-lg font-bold text-slate-700 transition-all duration-300 ease-in-out"
         >
