@@ -1,7 +1,7 @@
-import EducationInfoCv from "../layoutsSections/educationInfoCv/EducationInfoCv";
-import ExperienceInfoCv from "../layoutsSections/experienceInfoCv/ExperienceInfoCv";
-import PersonalInfoCv from "../layoutsSections/personalInfoCv/PersonalInfoCv";
-import SkillsInfoCv from "../layoutsSections/skillsInfoCv/SkillsInfoCv";
+import EducationInfoCv from "./layoutsSections/educationInfoCv/EducationInfoCv";
+import ExperienceInfoCv from "./layoutsSections/experienceInfoCv/ExperienceInfoCv";
+import PersonalInfoCv from "./layoutsSections/personalInfoCv/PersonalInfoCv";
+import SkillsInfoCv from "./layoutsSections/skillsInfoCv/SkillsInfoCv";
 
 export default function HarvardLayout({cvData}) {
   return (

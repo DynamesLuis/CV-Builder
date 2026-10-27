@@ -1,4 +1,4 @@
-import HarvardLayout from "./layouts/HarvardLayout";
+import HarvardLayout from "./layouts/harvardlayout/HarvardLayout";
 
 export default function CvPreview({ cvData, selectedLayout }) {
   let layout;

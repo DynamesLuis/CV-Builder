@@ -1,4 +1,4 @@
-import SectionTitle from "../../shared/SectionTitle";
+import SectionTitle from "../../../shared/SectionTitle";
 
 export default function ExperienceInfoCv({ experienceData }) {
   return (
