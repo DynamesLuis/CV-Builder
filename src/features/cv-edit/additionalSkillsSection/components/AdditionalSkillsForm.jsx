@@ -44,6 +44,7 @@ export default function AdditionalSkillsForm({ skills, onChange }) {
     );
 
     setSkillsInfo(updatedSkills);
+    onChange(updatedSkills);
   };
 
   const handleOnChange = (indexToChange, newValue) => {
