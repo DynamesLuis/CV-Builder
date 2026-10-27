@@ -1,7 +1,7 @@
 import EditNavItem from "./EditNavItem";
 import navItems from "./navItems";
 
-export default function EditNav({ activeSection, onChangeSection }) {
+export default function EditNav({ activeSection, onChangeSection,setIsEditing }) {
   return (
     <nav className="flex gap-2">
       {navItems.map((navItem) => (
@@ -12,6 +12,7 @@ export default function EditNav({ activeSection, onChangeSection }) {
           id={navItem.id}
           activeSection={activeSection}
           icon={navItem.icon}
+          setIsEditing={setIsEditing}
         />
       ))}
     </nav>
