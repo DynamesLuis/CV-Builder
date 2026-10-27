@@ -1,9 +1,9 @@
-import SectionTitle from "../shared/SectionTitle"
+import SectionTitle from "../../shared/SectionTitle";
 
-export default function ExperienceInfoCv({experienceData}) {
+export default function ExperienceInfoCv({ experienceData }) {
   return (
     <section className="mt-7">
-      <SectionTitle title="Experience" /> 
+      <SectionTitle title="Experience" />
 
       <div className="space-y-5">
         {experienceData.map((experience) => (
@@ -18,7 +18,8 @@ export default function ExperienceInfoCv({experienceData}) {
               <div className="text-right text-sm">
                 <p>{experience.location}</p>
                 <p>
-                  {experience.startDate} - {experience.currentlyWorking ? "Present" : experience.endDate}
+                  {experience.startDate} -{" "}
+                  {experience.currentlyWorking ? "Present" : experience.endDate}
                 </p>
               </div>
             </div>
