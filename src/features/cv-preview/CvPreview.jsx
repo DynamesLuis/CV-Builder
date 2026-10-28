@@ -1,4 +1,5 @@
 import HarvardLayout from "./layouts/harvardLayout/HarvardLayout";
+import ModernLayout from "./layouts/modernLayout/ModernLayout";
 
 export default function CvPreview({ cvData, selectedLayout }) {
   let layout;
@@ -6,14 +7,13 @@ export default function CvPreview({ cvData, selectedLayout }) {
     case "harvard":
       layout = <HarvardLayout cvData={cvData} />;
       break;
+    case "modern":
+      layout = <ModernLayout cvData={cvData} />;
+      break;
 
     default:
-      layout = <HarvardLayout cvData={cvData} />
+      layout = <HarvardLayout cvData={cvData} />;
       break;
   }
-  return (
-    <div className="flex-1 min-h-screen bg-gray-100 p-2">
-      {layout}
-    </div>
-  );
+  return <div className="flex-1 min-h-screen bg-gray-100 p-2">{layout}</div>;
 }
