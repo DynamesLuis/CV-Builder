@@ -16,8 +16,8 @@ function App() {
     education: [],
     skills: [],
   });
-  const [selectedLayout, setSelectedLayout] = useState("modern");
-  const [activeSection, setActiveSection] = useState("personal-info-section");
+  const [selectedLayout, setSelectedLayout] = useState("harvard");
+  const [activeSection, setActiveSection] = useState("layout-section");
   const [editData, setEditData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [formAction, setFormAction] = useState("");
@@ -66,6 +66,8 @@ function App() {
         setActiveSection={setActiveSection}
         formAction={formAction}
         setFormAction={setFormAction}
+        selectedLayout={selectedLayout}
+        setSelectedLayout={setSelectedLayout}
       />
       <CvPreview cvData={previewData} selectedLayout={selectedLayout} />
     </div>
