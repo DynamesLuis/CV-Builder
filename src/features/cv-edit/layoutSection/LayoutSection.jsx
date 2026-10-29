@@ -1,7 +1,7 @@
 import HarvardPreview from "./components/HarvardPreview";
 import ModernPreview from "./components/ModernPreview";
 
-export default function LayoutSection({ selectedLayout }) {
+export default function LayoutSection({ selectedLayout, onSelect }) {
   const layouts = [
     {
       id: "harvard",
@@ -32,6 +32,7 @@ export default function LayoutSection({ selectedLayout }) {
           const isSelected = selectedLayout === layout.id;
           return (
             <article
+              onClick={() => onSelect(layout.id)}
               key={layout.id}
               className={`rounded-xl border p-4 transition-all duration-300 cursor-pointer ${
                 isSelected
