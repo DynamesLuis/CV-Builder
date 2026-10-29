@@ -16,6 +16,7 @@ export default function CvEdit({
   setActiveSection,
   formAction,
   setFormAction,
+  selectedLayout
 }) {
   return (
     <div className="flex-1">
@@ -24,7 +25,7 @@ export default function CvEdit({
         onChangeSection={setActiveSection}
         setIsEditing={setIsEditing}
       />
-      {activeSection === "layout-section" && <LayoutSection />}
+      {activeSection === "layout-section" && <LayoutSection selectedLayout={selectedLayout}/>}
       {activeSection === "personal-info-section" && (
         <PersonalInfoSection
           cvData={cvData}
