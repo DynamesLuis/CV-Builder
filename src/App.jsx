@@ -2,6 +2,7 @@ import { useState } from "react";
 import CvEdit from "./features/cv-edit/CvEdit";
 import CvPreview from "./features/cv-preview/CvPreview";
 import { useEffect } from "react";
+import Header from "./components/Header";
 
 const initialCvData = {
   personalInfo: {
@@ -66,28 +67,31 @@ function App() {
     localStorage.setItem("cvData", JSON.stringify(cvData));
   }, [cvData]);
 
-   useEffect(() => {
+  useEffect(() => {
     localStorage.setItem("layout", selectedLayout);
   }, [selectedLayout]);
 
   return (
-    <div className="flex w-full p-5">
-      <CvEdit
-        cvData={cvData}
-        setCvData={setCvData}
-        editData={editData}
-        setEditData={setEditData}
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-        formAction={formAction}
-        setFormAction={setFormAction}
-        selectedLayout={selectedLayout}
-        setSelectedLayout={setSelectedLayout}
-      />
-      <CvPreview cvData={previewData} selectedLayout={selectedLayout} />
-    </div>
+    <>
+      <Header />
+      <div className="flex w-full p-5">
+        <CvEdit
+          cvData={cvData}
+          setCvData={setCvData}
+          editData={editData}
+          setEditData={setEditData}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          formAction={formAction}
+          setFormAction={setFormAction}
+          selectedLayout={selectedLayout}
+          setSelectedLayout={setSelectedLayout}
+        />
+        <CvPreview cvData={previewData} selectedLayout={selectedLayout} />
+      </div>
+    </>
   );
 }
 
