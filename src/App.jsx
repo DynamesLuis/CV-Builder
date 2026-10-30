@@ -22,7 +22,10 @@ function App() {
     const savedData = localStorage.getItem("cvData");
     return savedData ? JSON.parse(savedData) : initialCvData;
   });
-  const [selectedLayout, setSelectedLayout] = useState("harvard");
+  const [selectedLayout, setSelectedLayout] = useState(() => {
+    const savedLayout = localStorage.getItem("layout");
+    return savedLayout ? savedLayout : "harvard";
+  });
   const [activeSection, setActiveSection] = useState("layout-section");
   const [editData, setEditData] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -62,6 +65,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem("cvData", JSON.stringify(cvData));
   }, [cvData]);
+
+   useEffect(() => {
+    localStorage.setItem("layout", selectedLayout);
+  }, [selectedLayout]);
 
   return (
     <div className="flex w-full p-5">
