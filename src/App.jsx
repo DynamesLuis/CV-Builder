@@ -71,9 +71,26 @@ function App() {
     localStorage.setItem("layout", selectedLayout);
   }, [selectedLayout]);
 
+  const exportCvDataToJson = () => {
+    const data = JSON.stringify(cvData, null, 4);
+    const blob = new Blob([data], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "my-cvData.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+    }, 0);
+  };
+
   return (
     <>
-      <Header />
+      <Header onExportJSON={exportCvDataToJson} />
       <div className="flex w-full p-5">
         <CvEdit
           cvData={cvData}
