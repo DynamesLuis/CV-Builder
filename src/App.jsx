@@ -90,7 +90,7 @@ function App() {
 
   return (
     <>
-      <Header onExportJSON={exportCvDataToJson} />
+      <Header onExportJSON={exportCvDataToJson} setCvData={setCvData}/>
       <div className="flex w-full p-5">
         <CvEdit
           cvData={cvData}
