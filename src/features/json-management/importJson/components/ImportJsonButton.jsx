@@ -1,6 +1,7 @@
-export default function ImportJsonButton() {
+export default function ImportJsonButton({ onClick }) {
   return (
     <button
+      onClick={onClick}
       type="button"
       className="flex items-center gap-2 cursor-pointer rounded-lg border border-slate-300 bg-white px-4 py-1 text-sm font-medium text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
     >
