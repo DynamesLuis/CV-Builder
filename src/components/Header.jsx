@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import ExportJsonButton from "../features/json-management/exportJson/components/ExportJsonButton";
 import ImportJsonButton from "../features/json-management/importJson/components/ImportJsonButton";
+import validateJsonData from "../utils/validateJsonData";
 
 export default function Header({ onExportJSON }) {
   const fileInputRef = useRef(null);
@@ -17,6 +18,12 @@ export default function Header({ onExportJSON }) {
       const fileContent = e.target.result;
       try {
         const jsonData = JSON.parse(fileContent);
+        const validation = validateJsonData(jsonData);
+
+        if (!validation.valid) {
+          console.error("Invalid CV structure:", validation.errors);
+          return;
+        }
         console.log(jsonData);
       } catch (error) {
         console.error("Invalid JSON file:", error);
