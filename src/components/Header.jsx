@@ -9,6 +9,22 @@ export default function Header({ onExportJSON }) {
     fileInputRef.current.click();
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const fileContent = e.target.result;
+      try {
+        const jsonData = JSON.parse(fileContent);
+        console.log(jsonData);
+      } catch (error) {
+        console.error("Invalid JSON file:", error);
+      }
+    };
+    reader.readAsText(file);
+  };
+
   return (
     <header className="w-full border-b border-slate-200 bg-gray-100 px-6 py-4">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
@@ -21,6 +37,7 @@ export default function Header({ onExportJSON }) {
             type="file"
             accept=".json,application/json"
             className="hidden"
+            onChange={handleFileChange}
           />
           <ExportJsonButton onExportJSON={onExportJSON} />
           <ImportJsonButton onClick={handleImportClick} />
