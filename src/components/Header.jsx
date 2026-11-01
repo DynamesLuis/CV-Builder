@@ -3,7 +3,7 @@ import ExportJsonButton from "../features/json-management/exportJson/components/
 import ImportJsonButton from "../features/json-management/importJson/components/ImportJsonButton";
 import validateJsonData from "../utils/validateJsonData";
 
-export default function Header({ onExportJSON }) {
+export default function Header({ onExportJSON, setCvData }) {
   const fileInputRef = useRef(null);
 
   const handleImportClick = () => {
@@ -24,7 +24,7 @@ export default function Header({ onExportJSON }) {
           console.error("Invalid CV structure:", validation.errors);
           return;
         }
-        console.log(jsonData);
+        setCvData(jsonData);
       } catch (error) {
         console.error("Invalid JSON file:", error);
       }
