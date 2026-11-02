@@ -26,7 +26,7 @@ export default function AdditionalSkillsSection({
   };
 
   return (
-    <div className="my-4">
+    <div className="">
       <h2 className="font-bold text-lg">Additional Skills</h2>
       <div className="flex justify-between">
         <p className="text-xs text-slate-600 font-normal">

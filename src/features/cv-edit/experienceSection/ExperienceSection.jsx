@@ -63,7 +63,7 @@ export default function ExperienceSection({
   };
 
   return (
-    <div className="my-4">
+    <div className="">
       <h2 className="font-bold text-lg">Work experience</h2>
       <div className="flex justify-between">
         <p className="text-xs text-slate-600 font-normal">

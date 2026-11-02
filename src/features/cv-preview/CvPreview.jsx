@@ -15,5 +15,5 @@ export default function CvPreview({ cvData, selectedLayout }) {
       layout = <HarvardLayout cvData={cvData} />;
       break;
   }
-  return <div className="flex-1 min-h-screen bg-gray-100 p-2">{layout}</div>;
+  return <div className="flex-1 bg-gray-100 p-2 h-full overflow-y-auto">{layout}</div>;
 }

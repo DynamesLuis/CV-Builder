@@ -62,7 +62,7 @@ export default function EducationSection({
   };
 
   return (
-    <div className="my-4">
+    <div className="">
       <h2 className="font-bold text-lg">Education</h2>
       <div className="flex justify-between">
         <p className="text-xs text-slate-600 font-normal">

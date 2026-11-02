@@ -28,7 +28,7 @@ export default function PersonalInfoSection({
   };
 
   return (
-    <div className="my-4">
+    <div className="">
       <h2 className="font-bold text-lg">General Information and Contact</h2>
       <p className="text-xs text-slate-600 font-normal">
         Key details that will appear at the top of your résumé.
