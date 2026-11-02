@@ -59,6 +59,10 @@ export default function Header({ onExportJSON, setCvData }) {
     reader.readAsText(file);
   };
 
+  const handleCloseNotification = () => {
+    setNotification(null);
+  };
+
   return (
     <header className="w-full border-b border-slate-200 bg-gray-100 px-6 py-4">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
@@ -77,7 +81,12 @@ export default function Header({ onExportJSON, setCvData }) {
           <ImportJsonButton onClick={handleImportClick} />
         </div>
       </div>
-      <Notification type={notification?.type} message={notification?.message} />
+      <Notification
+        type={notification?.type}
+        message={notification?.message}
+        onClose={handleCloseNotification}
+        duration={4000}
+      />
     </header>
   );
 }

@@ -1,4 +1,11 @@
-export default function Notification({ type = "success", message }) {
+import { useEffect } from "react";
+
+export default function Notification({
+  type = "success",
+  message,
+  onClose,
+  duration = 4000,
+}) {
   const styles = {
     success: {
       container: "border-emerald-200 bg-emerald-50",
@@ -15,6 +22,16 @@ export default function Notification({ type = "success", message }) {
   };
 
   const currentStyle = styles[type] || styles.error;
+
+  useEffect(() => {
+    if (!message) return;
+
+    const timer = setTimeout(() => {
+      onClose();
+    }, duration);
+
+    return () => clearTimeout(timer);
+  }, [message, duration, onClose]);
 
   if (!message) return null;
 
