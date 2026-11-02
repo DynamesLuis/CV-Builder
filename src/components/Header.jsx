@@ -1,10 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ExportJsonButton from "../features/json-management/exportJson/components/ExportJsonButton";
 import ImportJsonButton from "../features/json-management/importJson/components/ImportJsonButton";
 import validateJsonData from "../utils/validateJsonData";
+import Notification from "../features/notification/Notification";
 
 export default function Header({ onExportJSON, setCvData }) {
   const fileInputRef = useRef(null);
+  const [notification, setNotification] = useState(null);
 
   const handleImportClick = () => {
     fileInputRef.current.click();
@@ -16,12 +18,18 @@ export default function Header({ onExportJSON, setCvData }) {
     e.target.value = "";
     const isJsonFile = file.name.toLowerCase().endsWith(".json");
     if (!isJsonFile) {
-      console.log("Please select a JSON file");
+      setNotification({
+        type: "error",
+        message: "Please select a JSON file",
+      });
       return;
     }
     const reader = new FileReader();
     reader.onerror = () => {
-      console.log("Error reading file:", reader.error);
+      setNotification({
+        type: "error",
+        message: "Error reading file: " + reader.error,
+      });
     };
     reader.onload = (e) => {
       try {
@@ -30,16 +38,29 @@ export default function Header({ onExportJSON, setCvData }) {
         const validation = validateJsonData(jsonData);
 
         if (!validation.valid) {
-          console.error("Invalid CV structure:", validation.errors);
+          setNotification({
+            type: "error",
+            message: "Invalid CV structure " + validation.errors,
+          });
           return;
         }
-        console.log("leido")
         setCvData(jsonData);
+        setNotification({
+          type: "success",
+          message: "Your CV was imported successfully.",
+        });
       } catch (error) {
-        console.error("Invalid JSON file:", error);
+        setNotification({
+          type: "error",
+          message: "Invalid JSON file: " + error,
+        });
       }
     };
     reader.readAsText(file);
+  };
+
+  const handleCloseNotification = () => {
+    setNotification(null);
   };
 
   return (
@@ -60,6 +81,12 @@ export default function Header({ onExportJSON, setCvData }) {
           <ImportJsonButton onClick={handleImportClick} />
         </div>
       </div>
+      <Notification
+        type={notification?.type}
+        message={notification?.message}
+        onClose={handleCloseNotification}
+        duration={4000}
+      />
     </header>
   );
 }
