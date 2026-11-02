@@ -13,10 +13,19 @@ export default function Header({ onExportJSON, setCvData }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+    e.target.value = "";
+    const isJsonFile = file.name.toLowerCase().endsWith(".json");
+    if (!isJsonFile) {
+      console.log("Please select a JSON file");
+      return;
+    }
     const reader = new FileReader();
+    reader.onerror = () => {
+      console.log("Error reading file:", reader.error);
+    };
     reader.onload = (e) => {
-      const fileContent = e.target.result;
       try {
+        const fileContent = e.target.result;
         const jsonData = JSON.parse(fileContent);
         const validation = validateJsonData(jsonData);
 
@@ -24,6 +33,7 @@ export default function Header({ onExportJSON, setCvData }) {
           console.error("Invalid CV structure:", validation.errors);
           return;
         }
+        console.log("leido")
         setCvData(jsonData);
       } catch (error) {
         console.error("Invalid JSON file:", error);
