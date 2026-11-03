@@ -20,7 +20,7 @@ export default function CvEdit({
   setSelectedLayout
 }) {
   return (
-    <div className="flex-1 pr-5 h-full overflow-y-auto">
+    <div className="lg:flex-1 lg:min-h-0 lg:overflow-y-auto">
       <EditNav
         activeSection={activeSection}
         onChangeSection={setActiveSection}
