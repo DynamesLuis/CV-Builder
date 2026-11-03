@@ -63,9 +63,9 @@ export default function EducationSection({
 
   return (
     <div className="">
-      <h2 className="font-bold text-lg">Education</h2>
+      <h2 className="text-lg font-semibold text-slate-800">Education</h2>
       <div className="flex justify-between">
-        <p className="text-xs text-slate-600 font-normal">
+        <p className="mt-1 text-sm text-slate-500">
           Academic degrees, certifications, and valuable specializations
         </p>
         <button
