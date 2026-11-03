@@ -16,7 +16,7 @@ export default function LayoutSection({ selectedLayout, onSelect }) {
   ];
 
   return (
-    <section className="my-4">
+    <section className="">
       <div className="mb-5">
         <h2 className="text-lg font-semibold text-slate-800">
           Choose a Layout

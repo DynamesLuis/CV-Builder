@@ -89,9 +89,9 @@ function App() {
   };
 
   return (
-    <>
-      <Header onExportJSON={exportCvDataToJson} setCvData={setCvData}/>
-      <div className="flex w-full p-5">
+    <div className="flex flex-col lg:h-screen lg:overflow-hidden">
+      <Header onExportJSON={exportCvDataToJson} setCvData={setCvData} />
+      <main className="flex flex-col lg:flex-row w-full p-5 min-h-screen lg:min-h-0 lg:flex-1 lg:overflow-hidden">
         <CvEdit
           cvData={cvData}
           setCvData={setCvData}
@@ -107,8 +107,8 @@ function App() {
           setSelectedLayout={setSelectedLayout}
         />
         <CvPreview cvData={previewData} selectedLayout={selectedLayout} />
-      </div>
-    </>
+      </main>
+    </div>
   );
 }
 

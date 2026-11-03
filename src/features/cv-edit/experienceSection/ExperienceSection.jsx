@@ -63,10 +63,10 @@ export default function ExperienceSection({
   };
 
   return (
-    <div className="my-4">
-      <h2 className="font-bold text-lg">Work experience</h2>
+    <div className="">
+      <h2 className="text-lg font-semibold text-slate-800">Work experience</h2>
       <div className="flex justify-between">
-        <p className="text-xs text-slate-600 font-normal">
+        <p className="mt-1 text-sm text-slate-500">
           Describe your impactful roles and quantifiable achievements in
           chronological order.
         </p>

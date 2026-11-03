@@ -22,7 +22,7 @@ export default function ImportJsonButton({ onClick }) {
         <path d="M7 9l5 -5l5 5" />
         <path d="M12 4l0 12" />
       </svg>
-      Import JSON
+      Import JSON Data
     </button>
   );
 }

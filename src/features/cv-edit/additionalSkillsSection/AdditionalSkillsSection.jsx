@@ -26,10 +26,10 @@ export default function AdditionalSkillsSection({
   };
 
   return (
-    <div className="my-4">
-      <h2 className="font-bold text-lg">Additional Skills</h2>
+    <div className="">
+      <h2 className="text-lg font-semibold text-slate-800">Additional Skills</h2>
       <div className="flex justify-between">
-        <p className="text-xs text-slate-600 font-normal">
+        <p className="mt-1 text-sm text-slate-500">
           Highlight your key skills, strengths, and areas of expertise.
         </p>
         <div className="flex justify-end gap-3 mt-4">
