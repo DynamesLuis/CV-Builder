@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import ExportJsonButton from "../features/json-management/exportJson/components/ExportJsonButton";
 import ImportJsonButton from "../features/json-management/importJson/components/ImportJsonButton";
+import ExportPdfButton from "../features/pdfExport/ExportPdfButton";
 import validateJsonData from "../utils/validateJsonData";
 import Notification from "../features/notification/Notification";
 
@@ -79,6 +80,7 @@ export default function Header({ onExportJSON, setCvData }) {
           />
           <ExportJsonButton onExportJSON={onExportJSON} />
           <ImportJsonButton onClick={handleImportClick} />
+          <ExportPdfButton />
         </div>
       </div>
       <Notification
