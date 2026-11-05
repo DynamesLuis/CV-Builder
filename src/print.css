@@ -1,0 +1,42 @@
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .print-container {
+    min-height: auto;
+    height: auto;
+    overflow: visible;
+    padding: 0;
+    display: block;
+  }
+
+  .no-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .no-shadow {
+    box-shadow: none;
+  }
+
+  .no-space {
+    margin: 0;
+    padding: 0;
+  }
+
+  .section-heading {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 12mm 15mm;
+}

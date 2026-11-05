@@ -7,7 +7,7 @@ export default function EducationInfoCv({educationData}) {
 
       <div className="space-y-5">
         {educationData.map((education) => (
-          <div key={education.id}>
+          <div key={education.id} className="no-break">
             <div className="flex justify-between gap-4">
               <div>
                 <h3 className="font-bold">{education.institution}</h3>

@@ -3,7 +3,7 @@ export default function ModernExperience({ experienceData }) {
 
   return (
     <section className="mb-10">
-      <h2 className="mb-6 flex items-center gap-3 text-lg font-bold tracking-wide text-slate-900">
+      <h2 className="mb-6 flex items-center gap-3 text-lg font-bold tracking-wide text-slate-900 section-heading">
         <span className="h-6 w-1 rounded-full bg-sky-500" />
         Professional Experience
       </h2>
@@ -22,7 +22,7 @@ export default function ModernExperience({ experienceData }) {
           } = experience;
 
           return (
-            <article key={id} className="relative">
+            <article key={id} className="relative no-break">
               <span className="absolute -left-[27px] top-1.5 size-3 rounded-full border-2 border-sky-500 bg-white" />
 
               <div className="flex flex-col gap-1 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
