@@ -72,7 +72,7 @@ export default function ExperienceSection({
         </p>
         <button
           onClick={handleAddExperienceClick}
-          className="flex items-center text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out"
+          className="self-start min-w-40 flex items-center text-sm bg-blue-600 hover:bg-blue-500 text-white cursor-pointer px-4 py-px rounded-lg font-bold transition-all duration-300 ease-in-out"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
