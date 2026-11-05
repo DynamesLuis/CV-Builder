@@ -65,7 +65,7 @@ export default function Header({ onExportJSON, setCvData }) {
   };
 
   return (
-    <header className="w-full border-b border-slate-200 bg-gray-100 px-6 py-4">
+    <header className="w-full border-b border-slate-200 bg-gray-100 px-6 py-4 no-print">
       <div className="mx-auto flex max-w-7xl flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <h1 className="shrink-0 text-center text-xl font-bold tracking-tight text-slate-800">
           CV Builder

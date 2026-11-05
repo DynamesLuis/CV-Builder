@@ -3,7 +3,7 @@ export default function ModernSkills({ skillsData }) {
 
   return (
     <section className="mb-2">
-      <h2 className="mb-5 flex items-center gap-3 text-lg font-bold tracking-wide text-slate-900">
+      <h2 className="mb-5 flex items-center gap-3 text-lg font-bold tracking-wide text-slate-900 section-heading">
         <span className="h-6 w-1 rounded-full bg-sky-500" />
         Skills
       </h2>

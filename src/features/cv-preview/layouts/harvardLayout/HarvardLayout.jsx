@@ -5,7 +5,7 @@ import SkillsInfoCv from "./layoutsSections/skillsInfoCv/SkillsInfoCv";
 
 export default function HarvardLayout({cvData}) {
   return (
-    <article className="mx-auto max-w-4xl min-h-full bg-white px-12 py-14 text-gray-900 shadow-sm">
+    <article className="mx-auto max-w-4xl min-h-full bg-white px-12 py-14 text-gray-900 shadow-sm no-shadow no-space">
       <PersonalInfoCv personaInfoData={cvData.personalInfo} />
       <ExperienceInfoCv experienceData={cvData.experience} />
       <EducationInfoCv educationData={cvData.education} />

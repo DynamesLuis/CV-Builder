@@ -1,6 +1,11 @@
 export default function ExportPdfButton() {
+  const handleClick = () => {
+    window.print();
+  };
+
   return (
     <button
+      onClick={handleClick}
       type="button"
       className="flex items-center gap-2 cursor-pointer rounded-lg bg-blue-600 px-4 py-1 text-sm font-medium text-white transition-colors hover:bg-blue-700"
     >

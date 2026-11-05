@@ -7,7 +7,7 @@ export default function ExperienceInfoCv({ experienceData }) {
 
       <div className="space-y-5">
         {experienceData.map((experience) => (
-          <div key={experience.id}>
+          <div key={experience.id} className="no-break">
             <div className="flex justify-between gap-4">
               <div>
                 <h3 className="font-bold">{experience.company}</h3>
